@@ -4,7 +4,7 @@
     <MeetupCover :title="meetupWithImage.title" :image="meetupWithImage.image" />
 
     <h1 style="text-align: center">Без изображения</h1>
-    <MeetupCover :title="meetupWithoutImage.title" :image="meetupWithoutImage.image" />
+    <MeetupCover :title="meetupWithoutImage.title" :image="meetupWithoutImage.image" test="sdf" />
   </div>
 </template>
 
