@@ -5,22 +5,21 @@
       <span>{{ currentOption?.text ?? title }}</span>
     </button>
 
-    <div v-if="opened" class="dropdown__menu" role="listbox">
+    <div v-show="opened" class="dropdown__menu" role="listbox">
       <button v-for="option in options" :key="option.value" @click="select(option)"
               class="dropdown__item" :class="{'dropdown__item_icon': hasIcon}" role="option" type="button">
         <UiIcon v-if="option.icon" :icon="option.icon" class="dropdown__icon"/>
         {{ option.text }}
       </button>
     </div>
-
-    <select v-show="false" :value="modelValue" @change="test">
-      <option value="" disabled>{{ title }}</option>
-      <option v-for="option in options" :key="option.value" :value="option.value">
-        {{ option.text }}
-      </option>
-    </select>
-
   </div>
+
+  <select v-show="false" :value="modelValue" @change="test">
+    <!-- <option value="" disabled>{{ title }}</option> -->
+    <option v-for="option in options" :key="option.value" :value="option.value">
+      {{ option.text }}
+    </option>
+  </select>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="toast toast_type">
+  <div :class="`toast toast_${type}`">
     <UiIcon class="toast__icon" :icon="icon" />
     <span>{{ text }}</span>
   </div>
@@ -69,6 +69,14 @@ export default {
   margin-right: 12px;
 }
 
+.toast.toast_success {
+  color: var(--green);
+}
+.toast.toast_error {
+  color: var(--red);
+}
+
+/* заготовка на будущее */
 .toast.toast_type {
   color: v-bind(color);
 }
