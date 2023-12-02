@@ -2,7 +2,10 @@ import { defineComponent } from '../vendor/vue.esm-browser.js';
 
 export default defineComponent({
   name: 'MeetupCover',
-  props: ['title', 'image'],
+  props: {
+    title: String,
+    image: String,
+  },
 
   computed: {
     imageUrl() {

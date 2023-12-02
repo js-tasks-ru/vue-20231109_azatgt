@@ -24,13 +24,13 @@ export default {
 
   components: { UiIcon, UiToast },
   methods: {
-    toast(text, type) {
+    toast(text, type = 'info', delay = this.delay) {
       const id = counter++
       this.toastList.push({ id, text, type })
 
       setTimeout(() => {
         this.toastList = this.toastList.filter(t => t.id !== id)
-      }, this.delay)
+      }, delay)
     },
 
     success(text) {

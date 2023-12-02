@@ -14,9 +14,15 @@
           </div>
         </UiFormGroup>
         <div class="form__buttons">
-          <button type="submit" class="button button_primary button_block">Войти</button>
+          <button type="submit" class="button button_primary button_block"
+                  @click="handleSubmit">
+            Войти
+          </button>
         </div>
-        <div class="form__append">Нет аккаунта? <a href="/register" class="link">Зарегистрируйтесь</a></div>
+        <div class="form__append">
+          Нет аккаунта?
+          <router-link to="/register" class="link">Зарегистрируйтесь</router-link>
+        </div>
       </form>
     </UiContainer>
   </div>
@@ -34,9 +40,14 @@ export default {
     UiContainer,
   },
 
+  props: {
+    from: String
+  },
+
   methods: {
     handleSubmit() {
-      // Требуется обработать сабмит формы
+      if (this.from) this.$router.push(this.from)
+      else this.$router.push('/')
     },
   },
 };
