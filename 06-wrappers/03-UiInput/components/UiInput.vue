@@ -1,13 +1,20 @@
 <template>
-  <div class="input-group input-group_icon input-group_icon-left input-group_icon-right">
-    <div class="input-group__icon">
-      <img class="icon" alt="icon" />
+  <div class="input-group"
+       :class="{'input-group_icon': hasIcon(),
+                'input-group_icon-left': hasLeftIcon(),
+                'input-group_icon-right': hasRightIcon()}">
+    <div v-if="hasLeftIcon()" class="input-group__icon">
+      <slot name="left-icon"/>
     </div>
 
-    <input ref="input" class="form-control form-control_rounded form-control_sm" />
+    <!-- :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" vs v-model="model"-->
+    <component :is="multiline ? 'textarea' : 'input'" ref="input"
+               :value="modelValue" @[changeEvent]="$emit('update:modelValue', $event.target.value)"
+               class="form-control" :class="{ 'form-control_sm': small, 'form-control_rounded': rounded }"
+               v-bind="$attrs"/>
 
-    <div class="input-group__icon">
-      <img class="icon" alt="icon" />
+    <div v-if="hasRightIcon()" class="input-group__icon">
+      <slot name="right-icon"/>
     </div>
   </div>
 </template>
@@ -15,6 +22,43 @@
 <script>
 export default {
   name: 'UiInput',
+  inheritAttrs: false,
+
+  props: {
+    small: Boolean,
+    rounded: Boolean,
+    multiline: Boolean,
+    modelValue: String,
+  },
+  emits: ['update:modelValue'],
+
+  methods: {
+    focus() {
+      this.$refs['input'].focus()
+    },
+    hasLeftIcon() {
+      return !!this.$slots['left-icon']
+    },
+    hasRightIcon() {
+      return !!this.$slots['right-icon']
+    },
+    hasIcon() {
+      return this.hasLeftIcon() || this.hasRightIcon()
+    }
+  },
+  computed: {
+    model: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit('update:modelValue', value)
+      }
+    },
+    changeEvent() {
+      return this.$attrs.modelModifiers?.lazy ? 'blur' : 'input'
+    }
+  },
 };
 </script>
 

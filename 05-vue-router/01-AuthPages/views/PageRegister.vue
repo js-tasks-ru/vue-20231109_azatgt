@@ -31,7 +31,7 @@
           </label>
         </UiFormGroup>
         <div class="form__buttons">
-          <button type="submit" @click="handleSubmit" class="button button_primary">Зарегистрироваться</button>
+          <button type="submit" class="button button_primary">Зарегистрироваться</button>
         </div>
         <div class="form__append">
           Уже есть аккаунт?

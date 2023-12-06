@@ -24,7 +24,6 @@
 </template>
 
 <script>
-const today = new Date()
 
 export default {
   name: 'MeetupsCalendar',
@@ -37,6 +36,7 @@ export default {
   },
 
   data() {
+    const today = new Date()
     return {
       firstDay: new Date(today.getFullYear(), today.getMonth(), 1)
     }
