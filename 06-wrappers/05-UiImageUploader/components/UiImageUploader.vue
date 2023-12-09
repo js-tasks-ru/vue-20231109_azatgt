@@ -1,8 +1,14 @@
 <template>
   <div class="image-uploader">
-    <label class="image-uploader__preview image-uploader__preview-loading" style="--bg-url: url('/link.jpeg')">
-      <span class="image-uploader__text">Загрузить изображение</span>
-      <input type="file" accept="image/*" class="image-uploader__input" />
+    <label class="image-uploader__preview"
+           :class="{'image-uploader__preview-loading': uploading}"
+           :style="fileUrl ? `--bg-url: url(${fileUrl})` : ''">
+      <span class="image-uploader__text">
+        {{ text }}
+      </span>
+      <input ref="input" type="file" accept="image/*"
+             class="image-uploader__input" v-bind="$attrs"
+             @change="onChange" @click="onClick"/>
     </label>
   </div>
 </template>
@@ -10,6 +16,61 @@
 <script>
 export default {
   name: 'UiImageUploader',
+  inheritAttrs: false,
+
+  data() {
+    return {
+      fileUrl: this.preview,
+      uploading: false,
+    }
+  },
+
+  props: {
+    preview: String,
+    uploader: Function,
+  },
+
+  emits: ['select', 'upload', 'error', 'remove'],
+
+  computed: {
+    text() {
+      if (this.fileUrl) return 'Удалить изображение'
+      if (this.uploading) return 'Загрузка...'
+      return 'Загрузить изображение'
+    }
+  },
+
+  methods: {
+    onChange(event) {
+      
+      const file = event.target.files[0]
+
+      if (!this.uploader)
+        this.fileUrl = URL.createObjectURL(file)
+      else {
+        this.uploading = true
+        this.uploader(file)
+          .then(result => {
+            this.fileUrl = result.image
+            this.$emit('upload', result)
+          })
+          .catch(err => {
+            this.$refs.input.value = null
+            this.$emit('error', err)
+          })
+          .finally(() => this.uploading = false)
+      }
+      this.$emit('select', file)
+    },
+    onClick(event) {
+      if (this.fileUrl) {
+        event.preventDefault()
+        this.$refs.input.value = null
+        this.fileUrl = null
+        this.$emit('remove')
+      }
+    }
+  }
 };
 </script>
 

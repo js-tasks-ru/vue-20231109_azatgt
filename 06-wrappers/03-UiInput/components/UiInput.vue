@@ -56,7 +56,7 @@ export default {
       }
     },
     changeEvent() {
-      return this.$attrs.modelModifiers?.lazy ? 'blur' : 'input'
+      return this.$attrs.modelModifiers?.lazy ? 'change' : 'input'
     }
   },
 };
