@@ -1,10 +1,15 @@
 <template>
-  <a class="tabs__tab tabs__tab_active" role="tab">Tab</a>
+  <router-link :to="to" class="tabs__tab" exact-active-class="tabs__tab_active" role="tab">
+    <slot></slot>
+  </router-link>
 </template>
 
 <script>
 export default {
   name: 'UiTabsLink',
+  props: {
+    to: { type: [String, Object], required: true }
+  },
 };
 </script>
 

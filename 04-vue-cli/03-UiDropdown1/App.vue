@@ -15,6 +15,7 @@
     </p>
 
     <h2>Mixed icons</h2>
+    <p>selectedMixed = {{ selectedMixed }}</p>
     <UiDropdown v-model="selectedMixed" :options="mixedIconsOptions" title="Mixed icons" />
     <p></p>
   </div>
