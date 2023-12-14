@@ -23,8 +23,7 @@
 
     <UiFormGroup v-for="(el, key) in $options.agendaItemFormSchemas[localItem.type]"
                  :key="key" :label="el.label">
-      <component :is="el.component" v-bind="el.props"
-                 v-model="localItem[el.props.name]"/>
+      <component :is="el.component" v-bind="el.props" v-model="localItem[el.props.name]"/>
     </UiFormGroup>
 
   </fieldset>

@@ -10,10 +10,12 @@
 export default {
   name: 'UiCheckbox',
   inheritAttrs: false,
+  
   props: {
     modelValue: { type: [Boolean, Array, Set] }
   },
   emits: ['update:modelValue'],
+
   computed: {
     model: {
       get() {

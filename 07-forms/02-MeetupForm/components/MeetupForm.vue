@@ -118,6 +118,7 @@ export default {
       this.$emit('submit', copy(this.localMeetup))
     }
   }
+  
 };
 </script>
 

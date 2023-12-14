@@ -46,6 +46,7 @@ export default {
       return this.hasLeftIcon() || this.hasRightIcon()
     }
   },
+  
   computed: {
     model: {
       get() {
