@@ -1,6 +1,6 @@
 <template>
   <component :is="tag" class="button" :type="tag === 'button' ? 'button' : null"
-             :class="[`button_${variant}`, block && 'button_block']">
+             :class="[`button_${variant}`, {'button_block': block}]">
     <slot/>
   </component>
 </template>

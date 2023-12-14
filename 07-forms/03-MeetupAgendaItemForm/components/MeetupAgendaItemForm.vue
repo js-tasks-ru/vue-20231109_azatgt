@@ -137,7 +137,6 @@ export default {
       })[this.localItem.type] ?? 'Нестандартный текст (необязательно)'
     }
   }
-
 };
 </script>
 

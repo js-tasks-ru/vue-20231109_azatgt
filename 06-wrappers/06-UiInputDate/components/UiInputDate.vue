@@ -13,8 +13,8 @@ import UiInput from './UiInput.vue';
 
 export default {
   name: 'UiInputDate',
-
   components: { UiInput },
+
   props: {
     modelValue: Number,
     type: {

@@ -22,5 +22,6 @@ export default {
       this.localCount = newValue
     }
   }
+  
 };
 </script>

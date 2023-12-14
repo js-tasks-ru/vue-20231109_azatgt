@@ -29,7 +29,6 @@ export default {
     preview: String,
     uploader: Function,
   },
-
   emits: ['select', 'upload', 'error', 'remove'],
 
   computed: {
