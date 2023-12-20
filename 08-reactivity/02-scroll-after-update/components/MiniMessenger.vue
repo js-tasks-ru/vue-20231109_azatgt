@@ -1,6 +1,6 @@
 <template>
   <main class="mini-messenger">
-    <ul class="messages">
+    <ul ref="ulList" class="messages">
       <li v-for="message in messages" :key="message.id" class="message">
         {{ message.text }}
       </li>
@@ -44,6 +44,14 @@ export default {
       this.newMessage = '';
     },
   },
+  watch: {
+    'messages.length': {
+      async handler() {
+        await this.$nextTick()
+        this.$refs.ulList.scrollTop = this.$refs.ulList.scrollHeight
+      }
+    }
+  }
 };
 </script>
 
