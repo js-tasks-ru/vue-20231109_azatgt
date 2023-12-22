@@ -1,7 +1,7 @@
 <template>
   <main class="mini-messenger">
     <ul ref="ulList" class="messages">
-      <li v-for="message in messages" :key="message.id" class="message">
+      <li v-for="message in messages" :key="message.id" @dblclick="removeMsg(message.id)" class="message">
         {{ message.text }}
       </li>
     </ul>
@@ -32,8 +32,10 @@ export default {
   },
 
   methods: {
-    handleSendSubmit() {
+    async handleSendSubmit() {
       this.send();
+      await this.$nextTick()
+      this.$refs.ulList.scrollTop = this.$refs.ulList.scrollHeight
     },
 
     send() {
@@ -43,13 +45,10 @@ export default {
       });
       this.newMessage = '';
     },
-  },
-  watch: {
-    'messages.length': {
-      async handler() {
-        await this.$nextTick()
-        this.$refs.ulList.scrollTop = this.$refs.ulList.scrollHeight
-      }
+
+    // для проверки корректности скроллинга (скроллим только при добавлении, а при удалении нет)
+    removeMsg(msgId) {
+      this.messages = this.messages.filter(m => m.id !== msgId)
     }
   }
 };
