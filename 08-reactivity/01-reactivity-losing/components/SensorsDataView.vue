@@ -42,7 +42,14 @@ export default {
     },
 
     setData(sensors) {
-      this.sensors = sensors;
+      if (!this.sensors) this.sensors = {}
+
+      for (let id in sensors) {
+        const sensor = this.sensors[id]
+
+        if (sensor) sensor.value = sensors[id].value
+        else this.sensors[id] = { ...sensors[id] }
+      }
     },
   },
 };
