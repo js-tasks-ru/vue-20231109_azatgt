@@ -1,5 +1,5 @@
 <script>
-// import { compile } from 'vue';
+import { compile, defineComponent, h } from 'vue';
 
 export default {
   name: 'TemplateRenderer',
@@ -20,5 +20,24 @@ export default {
       default: () => [],
     },
   },
+
+  computed: {
+    renderFunction() {
+      console.log(compile(this.template));
+      return compile(this.template)
+    },
+    _component() {
+      return defineComponent({
+        name: '_component',
+        components: this.components,
+        props: ['bindings'],
+        render: this.renderFunction
+      })
+    }
+  },
+
+  render() {
+    return h(this._component, { bindings: this.bindings })
+  }
 };
 </script>
