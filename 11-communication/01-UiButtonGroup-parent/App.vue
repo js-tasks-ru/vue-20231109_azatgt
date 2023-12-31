@@ -49,6 +49,8 @@
         <UiButtonGroupItem value="organizing">Организация</UiButtonGroupItem>
       </UiButtonGroup>
     </p>
+
+    <UiButtonGroupItem value="test">Вне UiButtonGroup</UiButtonGroupItem>
   </div>
 </template>
 
