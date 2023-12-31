@@ -71,7 +71,6 @@ export default {
         day.setDate(day.getDate() + 1)
       }
 
-      const daysCount = lDay.getDate()
       while(lDay.getDay() !== 0) {
         lDay.setDate(lDay.getDate() + 1)
         calendar.push({ day: lDay.getDate(), date: lDay.valueOf(), inactive: true })
