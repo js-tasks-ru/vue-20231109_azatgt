@@ -1,5 +1,8 @@
 <template>
-  <button class="button-group__button button-group__button_active" type="button" aria-selected="false">Button</button>
+  <button ref="btnGroupItem" class="button-group__button" type="button" aria-selected="false" @click="onClick"
+          :class="{'button-group__button_active': $parent.$props.modelValue === value}">
+    <slot/>
+  </button>
 </template>
 
 <script>
@@ -11,6 +14,19 @@ export default {
       required: true,
     },
   },
+
+  mounted() {
+    if (this.$parent.$options.name !== 'UiButtonGroup') {
+      console.warn('The below UiButtonGroupItem is not a child of UiButtonGroup:')
+      console.warn(this.$refs.btnGroupItem)
+    }
+  },
+
+  methods: {
+    onClick() {
+      this.$parent.$emit('update:modelValue', this.value)
+    }
+  }
 };
 </script>
 

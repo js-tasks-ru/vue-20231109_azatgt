@@ -1,6 +1,6 @@
 <template>
-  <UiCalendarView>
-    <div v-for="holiday in internationalHolidaysMap[0][7]" :key="holiday" class="holiday">
+  <UiCalendarView v-slot="{date}">
+    <div v-for="(holiday, key) in getHolidays(date)" :key="key" class="holiday">
       {{ holiday }}
     </div>
   </UiCalendarView>
@@ -77,6 +77,14 @@ export default {
       return result;
     },
   },
+
+  methods: {
+    getHolidays(date) {
+      const month = new Date(date).getMonth()
+      const day = new Date(date).getDate()
+      return this.internationalHolidaysMap[month][day]
+    }
+  }
 };
 </script>
 
